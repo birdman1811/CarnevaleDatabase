@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datastore\BaseSize.cs" />
+    <Compile Include="Datastore\Base.cs" />
     <Compile Include="Datastore\Character.cs" />
     <Compile Include="Datastore\Faction.cs" />
     <Compile Include="Datastore\KeyWord.cs" />

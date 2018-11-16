@@ -8,5 +8,16 @@ namespace CarnevaleDatabase.Datastore
 {
     class WeaponAbility
     {
+        public WeaponAbility()
+        {
+        }
+
+        public WeaponAbility(string ability)
+        {
+            this.Ability = ability;
+        }
+
+        public int WeaponAbilityID { get; set; }
+        public string Ability { get; set; }
     }
 }
