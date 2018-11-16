@@ -12,7 +12,7 @@ namespace CarnevaleDatabase.Datastore
         {
         }
 
-        public Character(string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will, int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRule> specialRules, List<UniqueRule> uniqueRules)
+        public Character(string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will, int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRule> specialRules, List<UniqueRule> uniqueRules, bool isUnique)
         {
             this.Name = name;
             this.Movement = movement;
@@ -30,6 +30,7 @@ namespace CarnevaleDatabase.Datastore
             this.KeyWords = keyWords;
             this.SpecialRules = specialRules;
             this.UniqueRules = uniqueRules;
+            this.IsUnique = isUnique;
         }
 
         public string Name { get; set; }
@@ -49,6 +50,7 @@ namespace CarnevaleDatabase.Datastore
         internal List<SpecialRule> SpecialRules { get; set; }
         internal List<UniqueRule> UniqueRules { get; set; }
         public int CharID { get; set; }
+        public bool IsUnique { get; set; }
 
         public void AddWeapon(Weapon weapon)
         {

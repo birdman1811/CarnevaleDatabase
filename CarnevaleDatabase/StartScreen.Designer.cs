@@ -1,6 +1,6 @@
 ﻿namespace CarnevaleDatabase
 {
-    partial class Form1
+    partial class StartScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartScreen));
             this.label1 = new System.Windows.Forms.Label();
             this.createCharacter = new System.Windows.Forms.Button();
             this.editCharacter = new System.Windows.Forms.Button();
@@ -58,6 +58,7 @@
             this.createCharacter.TabIndex = 1;
             this.createCharacter.Text = "Create Character";
             this.createCharacter.UseVisualStyleBackColor = true;
+            this.createCharacter.Click += new System.EventHandler(this.createCharacter_Click);
             // 
             // editCharacter
             // 
@@ -67,6 +68,7 @@
             this.editCharacter.TabIndex = 2;
             this.editCharacter.Text = "Edit Character";
             this.editCharacter.UseVisualStyleBackColor = true;
+            this.editCharacter.Click += new System.EventHandler(this.editCharacter_Click);
             // 
             // createWeapon
             // 
@@ -76,6 +78,7 @@
             this.createWeapon.TabIndex = 3;
             this.createWeapon.Text = "Create Weapon";
             this.createWeapon.UseVisualStyleBackColor = true;
+            this.createWeapon.Click += new System.EventHandler(this.createWeapon_Click);
             // 
             // editWeapon
             // 
@@ -85,6 +88,7 @@
             this.editWeapon.TabIndex = 4;
             this.editWeapon.Text = "Edit Weapon";
             this.editWeapon.UseVisualStyleBackColor = true;
+            this.editWeapon.Click += new System.EventHandler(this.editWeapon_Click);
             // 
             // keyWords
             // 
@@ -94,6 +98,7 @@
             this.keyWords.TabIndex = 5;
             this.keyWords.Text = "Key Words";
             this.keyWords.UseVisualStyleBackColor = true;
+            this.keyWords.Click += new System.EventHandler(this.keyWords_Click);
             // 
             // specialRules
             // 
@@ -103,6 +108,7 @@
             this.specialRules.TabIndex = 6;
             this.specialRules.Text = "Special Rules";
             this.specialRules.UseVisualStyleBackColor = true;
+            this.specialRules.Click += new System.EventHandler(this.specialRules_Click);
             // 
             // createFaction
             // 
@@ -112,6 +118,7 @@
             this.createFaction.TabIndex = 7;
             this.createFaction.Text = "Create Faction";
             this.createFaction.UseVisualStyleBackColor = true;
+            this.createFaction.Click += new System.EventHandler(this.createFaction_Click);
             // 
             // editFaction
             // 
@@ -121,8 +128,9 @@
             this.editFaction.TabIndex = 8;
             this.editFaction.Text = "Edit Faction";
             this.editFaction.UseVisualStyleBackColor = true;
+            this.editFaction.Click += new System.EventHandler(this.editFaction_Click);
             // 
-            // Form1
+            // StartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -138,7 +146,7 @@
             this.Controls.Add(this.createCharacter);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "StartScreen";
             this.Text = "Carnevale Database Editor";
             this.ResumeLayout(false);
             this.PerformLayout();
