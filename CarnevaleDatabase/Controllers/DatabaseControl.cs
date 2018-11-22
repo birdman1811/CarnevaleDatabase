@@ -15,7 +15,7 @@ namespace CarnevaleDatabase.Controllers
         {
             string server = "31.132.4.108";
             string database = "carnevale_webapp";
-            string uid = "carnevale_webAdmin";
+            string uid = "carnevale_appAdmin";
             string password = "VYz!FWLos0BS";
 
 

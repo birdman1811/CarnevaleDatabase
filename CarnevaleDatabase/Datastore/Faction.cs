@@ -12,7 +12,7 @@ namespace CarnevaleDatabase.Datastore
         {
         }
 
-        public Faction(int factionID, string factionName, string factionCommand, string factionGamePlay, string factionImage, string factionLore, string factionIcon, string factionReverseIcon, string factionStrip)
+        public Faction(int factionID, string factionName, string factionCommand, string factionGamePlay, string factionImage, string factionLore, string factionIcon, string factionReverseIcon, string factionStrip, string detailedIcon)
         {
             this.FactionID = factionID;
             this.FactionName = factionName;
@@ -23,6 +23,7 @@ namespace CarnevaleDatabase.Datastore
             this.FactionIcon = factionIcon;
             this.FactionReverseIcon = factionReverseIcon;
             this.FactionStrip = factionStrip;
+            this.DetailedIcon = detailedIcon;
         }
 
         public int FactionID { get; set; }
@@ -34,5 +35,6 @@ namespace CarnevaleDatabase.Datastore
         public string FactionIcon { get; set; }
         public string FactionReverseIcon { get; set; }
         public string FactionStrip { get; set; }
+        public string DetailedIcon { get; set; }
     }
 }
