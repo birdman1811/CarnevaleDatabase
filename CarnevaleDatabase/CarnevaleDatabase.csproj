@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DatabaseControl.cs" />
+    <Compile Include="Controllers\FactionController.cs" />
     <Compile Include="Datastore\Base.cs" />
     <Compile Include="Datastore\Character.cs" />
     <Compile Include="Datastore\Faction.cs" />
@@ -112,6 +115,9 @@
     <EmbeddedResource Include="Interface\CreateCharacter.resx">
       <DependentUpon>CreateCharacter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interface\EditFaction.resx">
+      <DependentUpon>EditFaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StartScreen.resx">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,7 +144,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\favicon.ico" />
