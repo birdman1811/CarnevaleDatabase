@@ -67,6 +67,7 @@ namespace CarnevaleDatabase.Controllers
                 cmd.Parameters.AddWithValue("@imgUrl", faction.FactionImage);
 
                 int rows = cmd.ExecuteNonQuery();
+                connection.Close();
             }
         }
 
@@ -92,6 +93,7 @@ namespace CarnevaleDatabase.Controllers
                 cmd.Parameters.AddWithValue("@imgUrl", faction.FactionImage);
 
                 int rows = cmd.ExecuteNonQuery();
+                connection.Close();
             }
         }
     }

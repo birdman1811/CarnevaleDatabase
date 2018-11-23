@@ -66,5 +66,11 @@ namespace CarnevaleDatabase
             EditFaction editFactionScreen = new EditFaction();
             editFactionScreen.Show();
         }
+
+        private void equipmentButton_Click(object sender, EventArgs e)
+        {
+            EditEquipment equipmentScreen = new EditEquipment();
+            equipmentScreen.Show();
+        }
     }
 }

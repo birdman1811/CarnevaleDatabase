@@ -38,6 +38,7 @@
             this.specialRules = new System.Windows.Forms.Button();
             this.createFaction = new System.Windows.Forms.Button();
             this.editFaction = new System.Windows.Forms.Button();
+            this.equipmentButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -92,7 +93,7 @@
             // 
             // keyWords
             // 
-            this.keyWords.Location = new System.Drawing.Point(203, 289);
+            this.keyWords.Location = new System.Drawing.Point(329, 279);
             this.keyWords.Name = "keyWords";
             this.keyWords.Size = new System.Drawing.Size(159, 54);
             this.keyWords.TabIndex = 5;
@@ -102,7 +103,7 @@
             // 
             // specialRules
             // 
-            this.specialRules.Location = new System.Drawing.Point(203, 360);
+            this.specialRules.Location = new System.Drawing.Point(329, 363);
             this.specialRules.Name = "specialRules";
             this.specialRules.Size = new System.Drawing.Size(159, 54);
             this.specialRules.TabIndex = 6;
@@ -130,12 +131,23 @@
             this.editFaction.UseVisualStyleBackColor = true;
             this.editFaction.Click += new System.EventHandler(this.editFaction_Click);
             // 
+            // equipmentButton
+            // 
+            this.equipmentButton.Location = new System.Drawing.Point(84, 279);
+            this.equipmentButton.Name = "equipmentButton";
+            this.equipmentButton.Size = new System.Drawing.Size(159, 54);
+            this.equipmentButton.TabIndex = 9;
+            this.equipmentButton.Text = "Equipment";
+            this.equipmentButton.UseVisualStyleBackColor = true;
+            this.equipmentButton.Click += new System.EventHandler(this.equipmentButton_Click);
+            // 
             // StartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(567, 610);
+            this.Controls.Add(this.equipmentButton);
             this.Controls.Add(this.editFaction);
             this.Controls.Add(this.createFaction);
             this.Controls.Add(this.specialRules);
@@ -164,6 +176,7 @@
         private System.Windows.Forms.Button specialRules;
         private System.Windows.Forms.Button createFaction;
         private System.Windows.Forms.Button editFaction;
+        private System.Windows.Forms.Button equipmentButton;
     }
 }
 

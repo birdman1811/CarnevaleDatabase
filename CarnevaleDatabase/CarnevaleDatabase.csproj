@@ -69,16 +69,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DatabaseControl.cs" />
+    <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\FactionController.cs" />
+    <Compile Include="Controllers\KeyWordController.cs" />
     <Compile Include="Controllers\SpecialRulesController.cs" />
     <Compile Include="Datastore\Base.cs" />
     <Compile Include="Datastore\Character.cs" />
+    <Compile Include="Datastore\Equipment.cs" />
     <Compile Include="Datastore\Faction.cs" />
     <Compile Include="Datastore\KeyWord.cs" />
     <Compile Include="Datastore\SpecialRule.cs" />
     <Compile Include="Datastore\UniqueRule.cs" />
     <Compile Include="Datastore\Weapon.cs" />
     <Compile Include="Datastore\WeaponAbility.cs" />
+    <Compile Include="Interface\EditEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\EditEquipment.Designer.cs">
+      <DependentUpon>EditEquipment.cs</DependentUpon>
+    </Compile>
     <Compile Include="StartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\EditFaction.resx">
       <DependentUpon>EditFaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\KeyWords.resx">
+      <DependentUpon>KeyWords.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\SpecialRules.resx">
       <DependentUpon>SpecialRules.cs</DependentUpon>
