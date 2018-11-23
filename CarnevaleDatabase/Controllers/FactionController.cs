@@ -69,5 +69,30 @@ namespace CarnevaleDatabase.Controllers
                 int rows = cmd.ExecuteNonQuery();
             }
         }
+
+        public void InsertFaction(Faction faction)
+        {
+            connection = dBControl.getConnection();
+
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO Factions(faction_img_url, faction, faction_lore," +
+                " faction_gameplay, faction_command, icon," +
+                " detailedicon, reverseicon, strip) VALUES( @imgUrl, @factionName, @factionLore, @factionGameplay, @factionCommand, @factionIcon," +
+                " @detailedIcon, @reverseIcon, @strip ) ", connection))
+            {
+                cmd.Parameters.AddWithValue("@strip", faction.FactionStrip);
+                cmd.Parameters.AddWithValue("@reverseIcon", faction.FactionReverseIcon);
+                cmd.Parameters.AddWithValue("@detailedIcon", faction.DetailedIcon);
+                cmd.Parameters.AddWithValue("@factionIcon", faction.FactionIcon);
+                cmd.Parameters.AddWithValue("@factionCommand", faction.FactionCommand);
+                cmd.Parameters.AddWithValue("@factionGameplay", faction.FactionGamePlay);
+                cmd.Parameters.AddWithValue("@factionLore", faction.FactionLore);
+                cmd.Parameters.AddWithValue("@factionName", faction.FactionName);
+                cmd.Parameters.AddWithValue("@imgUrl", faction.FactionImage);
+
+                int rows = cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

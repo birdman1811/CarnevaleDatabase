@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DatabaseControl.cs" />
     <Compile Include="Controllers\FactionController.cs" />
+    <Compile Include="Controllers\SpecialRulesController.cs" />
     <Compile Include="Datastore\Base.cs" />
     <Compile Include="Datastore\Character.cs" />
     <Compile Include="Datastore\Faction.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interface\CreateCharacter.resx">
       <DependentUpon>CreateCharacter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\CreateFaction.resx">
+      <DependentUpon>CreateFaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\EditFaction.resx">
       <DependentUpon>EditFaction.cs</DependentUpon>

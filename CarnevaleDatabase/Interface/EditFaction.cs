@@ -81,6 +81,7 @@ namespace CarnevaleDatabase.Interface
                 factionSelectBox.Visible = false;
                 selectFactionLabel.Visible = false;
                 selectFactionButton.Visible = false;
+                this.Width = 1500;
             }
 
             if (state == false)
@@ -88,6 +89,7 @@ namespace CarnevaleDatabase.Interface
                 factionSelectBox.Visible = true;
                 selectFactionLabel.Visible = true;
                 selectFactionButton.Visible = true;
+                this.Width = 500;
             }
         }
 
@@ -114,5 +116,7 @@ namespace CarnevaleDatabase.Interface
         {
             SwitchHiddenVisible(false);
         }
+
+        
     }
 }
