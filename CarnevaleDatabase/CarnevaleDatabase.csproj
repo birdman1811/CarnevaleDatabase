@@ -150,6 +150,9 @@
     <EmbeddedResource Include="Interface\CreateFaction.resx">
       <DependentUpon>CreateFaction.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interface\EditEquipment.resx">
+      <DependentUpon>EditEquipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interface\EditFaction.resx">
       <DependentUpon>EditFaction.cs</DependentUpon>
     </EmbeddedResource>
