@@ -144,6 +144,9 @@
     <EmbeddedResource Include="Interface\EditFaction.resx">
       <DependentUpon>EditFaction.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interface\SpecialRules.resx">
+      <DependentUpon>SpecialRules.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StartScreen.resx">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </EmbeddedResource>

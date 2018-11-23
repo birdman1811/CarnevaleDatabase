@@ -11,7 +11,7 @@ namespace CarnevaleDatabase.Controllers
     class SpecialRulesController
     {
         MySqlConnection connection;
-        DatabaseControl dbControl;
+        DatabaseControl dbControl = new DatabaseControl();
         List<SpecialRule> specialRules = new List<SpecialRule>();
         MySqlCommand command;
         MySqlDataReader dataReader;
