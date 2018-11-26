@@ -12,8 +12,11 @@ namespace CarnevaleDatabase.Datastore
         {
         }
 
-        public Character(string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will, int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRule> specialRules, List<UniqueRule> uniqueRules, bool isUnique)
+        public Character(int charID, string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will,
+            int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRule> specialRules,
+            List<UniqueRule> uniqueRules, bool isUnique, string charType, Faction faction, string image)
         {
+            this.CharID = charID;
             this.Name = name;
             this.Movement = movement;
             this.Dexterity = dexterity;
@@ -31,8 +34,11 @@ namespace CarnevaleDatabase.Datastore
             this.SpecialRules = specialRules;
             this.UniqueRules = uniqueRules;
             this.IsUnique = isUnique;
+            this.CharType = charType;
+            this.Faction = Faction;
+            this.Image = image;
         }
-
+                
         public string Name { get; set; }
         public int Movement { get; set; }
         public int Dexterity { get; set; }
@@ -51,6 +57,9 @@ namespace CarnevaleDatabase.Datastore
         internal List<UniqueRule> UniqueRules { get; set; }
         public int CharID { get; set; }
         public bool IsUnique { get; set; }
+        public string CharType { get; set; }
+        public Faction Faction { get; set; }
+        public string Image { get; set; }
 
         public void AddWeapon(Weapon weapon)
         {
@@ -60,6 +69,11 @@ namespace CarnevaleDatabase.Datastore
         public void RemoveWeapon(Weapon weapon)
         {
             this.Weapons.Remove(weapon);
+        }
+
+        public void SetWeapons(List<Weapon> weapons)
+        {
+            this.Weapons = weapons;
         }
 
         public void AddKeyWord(KeyWord keyword)
@@ -72,6 +86,11 @@ namespace CarnevaleDatabase.Datastore
             this.KeyWords.Remove(keyword);
         }
 
+        public void SetKeyWords(List<KeyWord> keywords)
+        {
+            this.KeyWords = keywords;
+        }
+
         public void AddSpecialRules(SpecialRule specRule)
         {
             this.SpecialRules.Add(specRule);
@@ -82,6 +101,11 @@ namespace CarnevaleDatabase.Datastore
             this.SpecialRules.Remove(specRule);
         }
 
+        public void SetSpecialRules(List<SpecialRule> specRules)
+        {
+            this.SpecialRules = specRules;
+        }
+
         public void AddUniqueRule(UniqueRule uniqueRule)
         {
             this.UniqueRules.Add(uniqueRule);            
@@ -90,6 +114,11 @@ namespace CarnevaleDatabase.Datastore
         public void RemoveUniqueRule(UniqueRule uniqueRule)
         {
             this.UniqueRules.Remove(uniqueRule);
+        }
+
+        public void SetUniqueRules(List<UniqueRule> uniqueRules)
+        {
+            this.UniqueRules = uniqueRules;
         }
     }
 
