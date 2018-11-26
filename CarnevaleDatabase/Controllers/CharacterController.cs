@@ -101,18 +101,22 @@ namespace CarnevaleDatabase.Controllers
 
                  Thread uniqueRulesThread = new Thread(() => newCharacter.SetUniqueRules( GetUniqueRules(newCharacter.CharID)));
                 uniqueRulesThread.IsBackground = true;
+                uniqueRulesThread.Name = "UnqiueRulesThread";
                 uniqueRulesThread.Start();
 
                 Thread specialRulesThread = new Thread(() => newCharacter.SetSpecialRules(GetSpecialRules(newCharacter.CharID)));
                 specialRulesThread.IsBackground = true;
+                specialRulesThread.Name = "SpecialRulesThread";
                 specialRulesThread.Start();
 
                 Thread keyWordsThread = new Thread(() => newCharacter.SetKeyWords(GetKeyWords(newCharacter.CharID)));
                 keyWordsThread.IsBackground = true;
+                keyWordsThread.Name = "KeyWordsThread";
                 keyWordsThread.Start();
 
                 Thread weaponsThread = new Thread(() => newCharacter.SetWeapons(getWeapons(newCharacter.CharID)));
                 weaponsThread.IsBackground = true;
+                weaponsThread.Name = "WeaponsThread";
                 weaponsThread.Start();
 
                 charlist.Add(newCharacter);
