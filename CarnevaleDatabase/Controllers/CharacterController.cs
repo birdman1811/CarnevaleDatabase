@@ -27,25 +27,25 @@ namespace CarnevaleDatabase.Controllers
             {
 
                 case 6:
-                    sql = "GET * from GuildCharacterView";
+                    sql = "SELECT * from GuildCharacterView";
                     break;
                 case 7:
-                    sql = "Get * from RashaarCharacterView";
+                    sql = "SELECT * from RashaarCharacterView";
                     break;
                 case 8:
-                    sql = "GET * from DoctorsCharacterView";
+                    sql = "SELECT * from DoctorsCharacterView";
                     break;
                 case 9:
-                    sql = "GET * from PatriciansCharacterView";
+                    sql = "SELECT * from PatriciansCharacterView";
                     break;
                 case 10:
-                    sql = "GET * from VaticanCharacterView";
+                    sql = "SELECT * from VaticanCharacterView";
                     break;
                 case 11:
-                    sql = "GET * from StrigoiCharacterView";
+                    sql = "SELECT * from StrigoiCharacterView";
                     break;
                 case 12:
-                    sql = "GET * from GiftedCharacterView";
+                    sql = "SELECT * from GiftedCharacterView";
                     break;
             }
 
@@ -114,8 +114,8 @@ namespace CarnevaleDatabase.Controllers
                 Thread weaponsThread = new Thread(() => newCharacter.SetWeapons(getWeapons(newCharacter.CharID)));
                 weaponsThread.IsBackground = true;
                 weaponsThread.Start();
-                
 
+                charlist.Add(newCharacter);
             }
             connection.Close();
 
@@ -133,7 +133,7 @@ namespace CarnevaleDatabase.Controllers
 
             uniqueRulesConnection.Open();
 
-            using (MySqlCommand cmd = new MySqlCommand("GET * FROM Unique_Rules WHERE character_id = @charID", uniqueRulesConnection))
+            using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM Unique_Rules WHERE character_id = @charID", uniqueRulesConnection))
             {
                 cmd.Parameters.AddWithValue("@charID", charid);
 
@@ -152,9 +152,9 @@ namespace CarnevaleDatabase.Controllers
                 return uniqueRules;
         }
 
-        private List<SpecialRule> GetSpecialRules(int charid)
+        private List<SpecialRulesInstance> GetSpecialRules(int charid)
         {
-            List<SpecialRule> specialRules = new List<SpecialRule>();
+            List<SpecialRulesInstance> specialRules = new List<SpecialRulesInstance>();
 
             MySqlConnection specialRulesConnection;
             MySqlDataReader dataReader;
@@ -163,7 +163,7 @@ namespace CarnevaleDatabase.Controllers
 
             specialRulesConnection.Open();
 
-            using (MySqlCommand cmd = new MySqlCommand("GET * FROM SpecialRuleView WHERE char_id = @charID", specialRulesConnection))
+            using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM SpecialRuleView WHERE char_id = @charID", specialRulesConnection))
             {
                 cmd.Parameters.AddWithValue("@charID", charid);
 
@@ -171,7 +171,7 @@ namespace CarnevaleDatabase.Controllers
 
                 while (dataReader.Read())
                 {
-                    SpecialRule newRule = new SpecialRule(dataReader.GetInt16(0), dataReader.GetString(1), dataReader.GetInt16(2));
+                    SpecialRulesInstance newRule = new SpecialRulesInstance(dataReader.GetInt16(0), dataReader.GetString(3), dataReader.GetInt16(4));
                     specialRules.Add(newRule);
                 }
 
@@ -193,7 +193,7 @@ namespace CarnevaleDatabase.Controllers
 
             keyWordConnection.Open();
 
-            using (MySqlCommand cmd = new MySqlCommand("GET * FROM KeywordsView WHERE char_id = @charID", keyWordConnection))
+            using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM KeywordsView WHERE char_id = @charID", keyWordConnection))
             {
                 cmd.Parameters.AddWithValue("@charID", charid);
 
@@ -223,7 +223,7 @@ namespace CarnevaleDatabase.Controllers
 
             weaponsConnection.Open();
 
-            using (MySqlCommand cmd = new MySqlCommand("GET * FROM WeaponInstancesView WHERE char_id = @charID", weaponsConnection))
+            using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM WeaponInstancesView WHERE char_id = @charID", weaponsConnection))
             {
                 cmd.Parameters.AddWithValue("@charID", charid);
 

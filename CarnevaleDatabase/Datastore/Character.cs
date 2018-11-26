@@ -13,7 +13,7 @@ namespace CarnevaleDatabase.Datastore
         }
 
         public Character( string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will,
-            int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRule> specialRules,
+            int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRulesInstance> specialRules,
             List<UniqueRule> uniqueRules, bool isUnique, string charType, Faction faction, string image)
         {
             
@@ -53,7 +53,7 @@ namespace CarnevaleDatabase.Datastore
         internal Base BaseSize { get; set; }
         internal List<Weapon> Weapons { get; set; }
         internal List<KeyWord> KeyWords { get; set; }
-        internal List<SpecialRule> SpecialRules { get; set; }
+        internal List<SpecialRulesInstance> SpecialRules { get; set; }
         internal List<UniqueRule> UniqueRules { get; set; }
         public int CharID { get; set; }
         public bool IsUnique { get; set; }
@@ -91,17 +91,17 @@ namespace CarnevaleDatabase.Datastore
             this.KeyWords = keywords;
         }
 
-        public void AddSpecialRules(SpecialRule specRule)
+        public void AddSpecialRules(SpecialRulesInstance specRule)
         {
             this.SpecialRules.Add(specRule);
         }
 
-        public void RemoveSpecialRules(SpecialRule specRule)
+        public void RemoveSpecialRules(SpecialRulesInstance specRule)
         {
             this.SpecialRules.Remove(specRule);
         }
 
-        public void SetSpecialRules(List<SpecialRule> specRules)
+        public void SetSpecialRules(List<SpecialRulesInstance> specRules)
         {
             this.SpecialRules = specRules;
         }

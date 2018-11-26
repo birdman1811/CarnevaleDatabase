@@ -81,6 +81,7 @@
     <Compile Include="Datastore\Faction.cs" />
     <Compile Include="Datastore\KeyWord.cs" />
     <Compile Include="Datastore\SpecialRule.cs" />
+    <Compile Include="Datastore\SpecialRulesInstance.cs" />
     <Compile Include="Datastore\UniqueRule.cs" />
     <Compile Include="Datastore\Weapon.cs" />
     <Compile Include="Datastore\WeaponAbility.cs" />
@@ -151,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\CreateFaction.resx">
       <DependentUpon>CreateFaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\EditCharacter.resx">
+      <DependentUpon>EditCharacter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\EditEquipment.resx">
       <DependentUpon>EditEquipment.cs</DependentUpon>
