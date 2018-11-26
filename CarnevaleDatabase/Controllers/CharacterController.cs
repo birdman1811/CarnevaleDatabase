@@ -201,8 +201,9 @@ namespace CarnevaleDatabase.Controllers
 
                 while (dataReader.Read())
                 {
-                    KeyWord newKeyWord = new KeyWord(dataReader.GetInt16(0), dataReader.GetString(1));
+                    KeyWord newKeyWord = new KeyWord(dataReader.GetInt16(0), dataReader.GetString(3));
                     keywords.Add(newKeyWord);
+                    Console.WriteLine("* " + newKeyWord.KeyWordText);
                 }
 
             }
