@@ -21,7 +21,7 @@ namespace CarnevaleDatabase.Datastore
             this.Penetration = penetration;
         }
 
-        public string WeaponID { get; set; }
+        public int WeaponID { get; set; }
         public string WeaponName { get; set; }
         public int Range { get; set; }
         public int Evasion { get; set; }

@@ -12,11 +12,11 @@ namespace CarnevaleDatabase.Datastore
         {
         }
 
-        public Character(int charID, string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will,
+        public Character( string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will,
             int command, Base baseSize, int ducats, List<Weapon> weapons, List<KeyWord> keyWords, List<SpecialRule> specialRules,
             List<UniqueRule> uniqueRules, bool isUnique, string charType, Faction faction, string image)
         {
-            this.CharID = charID;
+            
             this.Name = name;
             this.Movement = movement;
             this.Dexterity = dexterity;

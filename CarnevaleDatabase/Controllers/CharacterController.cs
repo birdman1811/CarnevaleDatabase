@@ -110,6 +110,10 @@ namespace CarnevaleDatabase.Controllers
                 Thread keyWordsThread = new Thread(() => newCharacter.SetKeyWords(GetKeyWords(newCharacter.CharID)));
                 keyWordsThread.IsBackground = true;
                 keyWordsThread.Start();
+
+                Thread weaponsThread = new Thread(() => newCharacter.SetWeapons(getWeapons(newCharacter.CharID)));
+                weaponsThread.IsBackground = true;
+                weaponsThread.Start();
                 
 
             }
@@ -212,9 +216,31 @@ namespace CarnevaleDatabase.Controllers
         {
             List<Weapon> weapons = new List<Weapon>();
 
+            MySqlConnection weaponsConnection;
+            MySqlDataReader dataReader;
 
+            weaponsConnection = dBControl.getConnection();
 
-            return weapons;
+            weaponsConnection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("GET * FROM WeaponInstancesView WHERE char_id = @charID", weaponsConnection))
+            {
+                cmd.Parameters.AddWithValue("@charID", charid);
+
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Weapon newWeapon = new Weapon();
+                    newWeapon.WeaponID = dataReader.GetInt16(3);
+                    newWeapon.WeaponName = dataReader.GetString(2);
+                    weapons.Add(newWeapon);
+                }
+            }
+
+            weaponsConnection.Close();
+
+                return weapons;
         }
 
 
