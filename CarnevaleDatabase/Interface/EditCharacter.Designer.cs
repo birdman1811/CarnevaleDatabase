@@ -73,6 +73,12 @@
             this.addKeyWord = new System.Windows.Forms.Button();
             this.deleteKeyWordButton = new System.Windows.Forms.Button();
             this.keyWordsCombo = new System.Windows.Forms.ComboBox();
+            this.specRuleListBox = new System.Windows.Forms.ListBox();
+            this.removeSpecRuleButton = new System.Windows.Forms.Button();
+            this.specRuleCombo = new System.Windows.Forms.ComboBox();
+            this.specRuleAmountBox = new System.Windows.Forms.NumericUpDown();
+            this.updateSpecRuleNumber = new System.Windows.Forms.Button();
+            this.addNewRuleButton = new System.Windows.Forms.Button();
             this.statPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.baseSizeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movementBox)).BeginInit();
@@ -85,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.willBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ducatsBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.specRuleAmountBox)).BeginInit();
             this.SuspendLayout();
             // 
             // selectFactionToEditLabel
@@ -144,6 +151,12 @@
             // statPanel
             // 
             this.statPanel.BackColor = System.Drawing.Color.Cornsilk;
+            this.statPanel.Controls.Add(this.addNewRuleButton);
+            this.statPanel.Controls.Add(this.updateSpecRuleNumber);
+            this.statPanel.Controls.Add(this.specRuleAmountBox);
+            this.statPanel.Controls.Add(this.specRuleCombo);
+            this.statPanel.Controls.Add(this.removeSpecRuleButton);
+            this.statPanel.Controls.Add(this.specRuleListBox);
             this.statPanel.Controls.Add(this.keyWordsCombo);
             this.statPanel.Controls.Add(this.deleteKeyWordButton);
             this.statPanel.Controls.Add(this.addKeyWord);
@@ -526,6 +539,66 @@
             this.keyWordsCombo.Size = new System.Drawing.Size(121, 21);
             this.keyWordsCombo.TabIndex = 36;
             // 
+            // specRuleListBox
+            // 
+            this.specRuleListBox.FormattingEnabled = true;
+            this.specRuleListBox.Location = new System.Drawing.Point(502, 9);
+            this.specRuleListBox.Name = "specRuleListBox";
+            this.specRuleListBox.Size = new System.Drawing.Size(120, 95);
+            this.specRuleListBox.TabIndex = 37;
+            // 
+            // removeSpecRuleButton
+            // 
+            this.removeSpecRuleButton.Location = new System.Drawing.Point(502, 110);
+            this.removeSpecRuleButton.Name = "removeSpecRuleButton";
+            this.removeSpecRuleButton.Size = new System.Drawing.Size(120, 23);
+            this.removeSpecRuleButton.TabIndex = 38;
+            this.removeSpecRuleButton.Text = "Remove Rule";
+            this.removeSpecRuleButton.UseVisualStyleBackColor = true;
+            // 
+            // specRuleCombo
+            // 
+            this.specRuleCombo.FormattingEnabled = true;
+            this.specRuleCombo.Location = new System.Drawing.Point(502, 140);
+            this.specRuleCombo.Name = "specRuleCombo";
+            this.specRuleCombo.Size = new System.Drawing.Size(121, 21);
+            this.specRuleCombo.TabIndex = 39;
+            // 
+            // specRuleAmountBox
+            // 
+            this.specRuleAmountBox.Location = new System.Drawing.Point(502, 170);
+            this.specRuleAmountBox.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.specRuleAmountBox.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            -2147483648});
+            this.specRuleAmountBox.Name = "specRuleAmountBox";
+            this.specRuleAmountBox.Size = new System.Drawing.Size(120, 20);
+            this.specRuleAmountBox.TabIndex = 40;
+            // 
+            // updateSpecRuleNumber
+            // 
+            this.updateSpecRuleNumber.Location = new System.Drawing.Point(502, 196);
+            this.updateSpecRuleNumber.Name = "updateSpecRuleNumber";
+            this.updateSpecRuleNumber.Size = new System.Drawing.Size(120, 23);
+            this.updateSpecRuleNumber.TabIndex = 41;
+            this.updateSpecRuleNumber.Text = "Update Rule Amount";
+            this.updateSpecRuleNumber.UseVisualStyleBackColor = true;
+            // 
+            // addNewRuleButton
+            // 
+            this.addNewRuleButton.Location = new System.Drawing.Point(502, 225);
+            this.addNewRuleButton.Name = "addNewRuleButton";
+            this.addNewRuleButton.Size = new System.Drawing.Size(120, 23);
+            this.addNewRuleButton.TabIndex = 42;
+            this.addNewRuleButton.Text = "Add New Rule";
+            this.addNewRuleButton.UseVisualStyleBackColor = true;
+            // 
             // EditCharacter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -553,6 +626,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.willBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ducatsBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.specRuleAmountBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -605,5 +679,11 @@
         private System.Windows.Forms.Button deleteKeyWordButton;
         private System.Windows.Forms.Button addKeyWord;
         private System.Windows.Forms.ListBox keyWordsListBox;
+        private System.Windows.Forms.Button addNewRuleButton;
+        private System.Windows.Forms.Button updateSpecRuleNumber;
+        private System.Windows.Forms.NumericUpDown specRuleAmountBox;
+        private System.Windows.Forms.ComboBox specRuleCombo;
+        private System.Windows.Forms.Button removeSpecRuleButton;
+        private System.Windows.Forms.ListBox specRuleListBox;
     }
 }

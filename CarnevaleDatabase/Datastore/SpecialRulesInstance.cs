@@ -9,6 +9,7 @@ namespace CarnevaleDatabase.Datastore
     class SpecialRulesInstance : SpecialRule
     {
         private int amount;
+        
 
         public SpecialRulesInstance()
         {
@@ -20,6 +21,14 @@ namespace CarnevaleDatabase.Datastore
             
         }
 
+        public string fullString
+        {
+            get
+            {
+                return Rule + " (" + Amount + ")";
+            }
+        }
+
         public SpecialRulesInstance(int ruleId, string rule, int amount)
         {
             this.RuleID = ruleId;
@@ -28,5 +37,7 @@ namespace CarnevaleDatabase.Datastore
         }
 
         public int Amount { get => amount; set => amount = value; }
+
+        
     }
 }

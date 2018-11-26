@@ -21,7 +21,9 @@ namespace CarnevaleDatabase.Interface
         CharacterController charController = new CharacterController();
         Character selectedCharacter;
         List<KeyWord> keyWordsList = new List<KeyWord>();
-            KeyWordController keyWordController = new KeyWordController();
+        KeyWordController keyWordController = new KeyWordController();
+        List<SpecialRule> specialRules = new List<SpecialRule>();
+        SpecialRulesController specRulesController = new SpecialRulesController();
 
 
         public EditCharacter()
@@ -79,6 +81,13 @@ namespace CarnevaleDatabase.Interface
             keyWordsCombo.DisplayMember = "keyWordText";
             keyWordsListBox.DataSource = selectedCharacter.KeyWords;
             keyWordsListBox.DisplayMember = "keyWordText";
+
+            specialRules = specRulesController.getSpecialRules();
+            specRuleCombo.DataSource = specialRules;
+            specRuleCombo.DisplayMember = "rule";
+            specRuleListBox.DataSource = selectedCharacter.SpecialRules;
+            specRuleListBox.DisplayMember = "fullString";
+
         }
 
         private void testURLButton_Click(object sender, EventArgs e)
