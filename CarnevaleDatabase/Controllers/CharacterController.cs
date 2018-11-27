@@ -154,8 +154,8 @@ namespace CarnevaleDatabase.Controllers
             connection.Open();
 
             using (MySqlCommand cmd = new MySqlCommand("UPDATE Characters SET name = @name, base_size = @base, movement = @movement, " +
-                "dexterity = @dexterity, attack = @attack, protection = @protection, mind = @mind, actionpoints = @actionpoints, lifepoints = @lifepoints " +
-                "willpoints = @willpoints, commandpoints = @commandPoints, ducats = @ducats, char_type = @charType, is_unique = @isUnique " +
+                "dexterity = @dexterity, attack = @attack, protection = @protection, mind = @mind, actionpoints = @actionpoints, lifepoints = @lifepoints, " +
+                "willpoints = @willpoints, commandpoints = @commandPoints, ducats = @ducats, char_type = @charType, is_unique = @isUnique, " +
                 "faction = @faction, image_url = @image WHERE char_id = @charID", connection))
             {
                 cmd.Parameters.AddWithValue("@name", charToUpdate.Name);
@@ -185,6 +185,7 @@ namespace CarnevaleDatabase.Controllers
 
         private List<UniqueRule> GetUniqueRules(int charid)
         {
+            Console.WriteLine("Hello From " + Thread.CurrentThread.Name);
             List<UniqueRule> uniqueRules = new List<UniqueRule>();
 
             MySqlConnection uniqueRulesConnection;           
@@ -210,7 +211,9 @@ namespace CarnevaleDatabase.Controllers
 
             uniqueRulesConnection.Close();
 
-                return uniqueRules;
+            Console.WriteLine("Goodbye From " + Thread.CurrentThread.Name);
+
+            return uniqueRules;
         }        
 
         public void UpdateUniqueRules (UniqueRule ruleToUpdate)
@@ -286,8 +289,9 @@ namespace CarnevaleDatabase.Controllers
 
         }
 
-        private List<SpecialRulesInstance> GetSpecialRules(int charid)
+        public List<SpecialRulesInstance> GetSpecialRules(int charid)
         {
+            Console.WriteLine("Hello From " + Thread.CurrentThread.Name);
             List<SpecialRulesInstance> specialRules = new List<SpecialRulesInstance>();
 
             MySqlConnection specialRulesConnection;
@@ -306,6 +310,7 @@ namespace CarnevaleDatabase.Controllers
                 while (dataReader.Read())
                 {
                     SpecialRulesInstance newRule = new SpecialRulesInstance(dataReader.GetInt16(0), dataReader.GetString(3), dataReader.GetInt16(4));
+                    
                     specialRules.Add(newRule);
                 }
 
@@ -313,11 +318,95 @@ namespace CarnevaleDatabase.Controllers
 
             specialRulesConnection.Close();
 
+            Console.WriteLine("Goodbye From " + Thread.CurrentThread.Name);
+
             return specialRules;
+        }
+
+        public void InsertSpecialRuleInstance(SpecialRulesInstance ruleToInsert, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO Special_Rule_Instances (rule_id, character_id, amount) VALUES(@ruleId, " +
+                "@charID, @amount)", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleId", ruleToInsert.RuleID);
+                cmd.Parameters.AddWithValue("@charID", charID);
+                cmd.Parameters.AddWithValue("@amount", ruleToInsert.Amount);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+
+        }
+
+
+        public void DeleteSpecialRulesInstance(SpecialRulesInstance ruleToDelete, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM Special_Rule_Instances WHERE rule_id = @ruleID AND character_id = @charID " +
+                "AND amount = @amount", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleId", ruleToDelete.RuleID);
+                cmd.Parameters.AddWithValue("@charID", charID);
+                cmd.Parameters.AddWithValue("@amount", ruleToDelete.Amount);
+
+                int rows = cmd.ExecuteNonQuery();                
+                connection.Close();
+            }
+        }
+
+        public void UpdateSpecialRuleInstance(SpecialRulesInstance ruleToUpdate, int charID)
+        {
+
+            connection = dBControl.getConnection();
+            connection.Open();           
+
+            using (MySqlCommand cmd = new MySqlCommand("UPDATE Special_Rule_Instances SET amount = @amount WHERE rule_id = @ruleID AND character_id = @charID", connection))
+            {
+                cmd.Parameters.AddWithValue("@amount", ruleToUpdate.Amount);
+                cmd.Parameters.AddWithValue("@ruleID", ruleToUpdate.RuleID);
+                cmd.Parameters.AddWithValue("@charID", charID);
+
+                int rows = cmd.ExecuteNonQuery();
+                Console.WriteLine("Updated " + rows + " Lines");
+                connection.Close();
+            }
+        }
+
+
+        public int GetSpecialRuleID(SpecialRulesInstance specRule)
+        {
+            int ruleID = 0;
+
+            connection = dBControl.getConnection();
+            MySqlDataReader dataReader;
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT rule_id FROM Special_Rules WHERE rule = @ruleText", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleText", specRule.Rule);
+
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    ruleID = dataReader.GetInt16(0);
+                    Console.WriteLine("The ID for this Rule is " + ruleID);
+                }
+                connection.Close();
+            }
+
+            return ruleID;
         }
 
         public List<KeyWord> GetKeyWords(int charid)
         {
+
+            Console.WriteLine("Hello From " + Thread.CurrentThread.Name);
             List<KeyWord> keywords = new List<KeyWord>();
 
             MySqlConnection keyWordConnection;
@@ -344,11 +433,71 @@ namespace CarnevaleDatabase.Controllers
 
             keyWordConnection.Close();
 
+            Console.WriteLine("Goodbye From " + Thread.CurrentThread.Name);
+
             return keywords;
         }
 
-        private List<Weapon> getWeapons(int charid)
+        public int GetKeyWordID(KeyWord keyWord)
         {
+            int keyWordID = 0;
+
+            connection = dBControl.getConnection();
+            MySqlDataReader dataReader;
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT keyword_id FROM Keywords WHERE keyword = @ruleText", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleText", keyWord.KeyWordText);
+
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    keyWordID = dataReader.GetInt16(0);
+                    Console.WriteLine("The ID for this Rule is " + keyWordID);
+                }
+                connection.Close();
+            }
+
+            return keyWordID;
+        }
+
+        public void InsertKeyWordInstance(KeyWord keyword, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO Keyword_Instances (keyword, character_id) VALUES(@keyword, " +
+                "@charID)", connection))
+            {
+                cmd.Parameters.AddWithValue("@keyword", keyword.KeyWordID);
+                cmd.Parameters.AddWithValue("@charID", charID);                
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public void DeleteKeyWordInstance(KeyWord keyword, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM Keyword_Instances WHERE keyword = @keyword AND character_id = @charID", connection))
+            {
+                cmd.Parameters.AddWithValue("@keyword", keyword.KeyWordID);
+                cmd.Parameters.AddWithValue("@charID", charID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public List<Weapon> getWeapons(int charid)
+        {
+
+            Console.WriteLine("Hello From " + Thread.CurrentThread.Name);
             List<Weapon> weapons = new List<Weapon>();
 
             MySqlConnection weaponsConnection;
@@ -375,10 +524,41 @@ namespace CarnevaleDatabase.Controllers
 
             weaponsConnection.Close();
 
-                return weapons;
+            Console.WriteLine("Goodbye From " + Thread.CurrentThread.Name);
+
+            return weapons;
         }
 
+        public void InsertWeaponInstance(Weapon weapon, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
 
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO weapon_Instances (weapon, character_id) VALUES(@weapon, " +
+                "@charID)", connection))
+            {
+                cmd.Parameters.AddWithValue("@weapon", weapon.WeaponID);
+                cmd.Parameters.AddWithValue("@charID", charID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public void DeleteWeaponInstance(Weapon weapon, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM weapon_Instances WHERE weapon = @weapon AND character_id = @charID", connection))
+            {
+                cmd.Parameters.AddWithValue("@weapon", weapon.WeaponID);
+                cmd.Parameters.AddWithValue("@charID", charID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
     }
 }
     

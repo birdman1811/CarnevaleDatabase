@@ -35,6 +35,9 @@
             this.selectCharCombo = new System.Windows.Forms.ComboBox();
             this.selectCharButton = new System.Windows.Forms.Button();
             this.statPanel = new System.Windows.Forms.Panel();
+            this.saveCharButton = new System.Windows.Forms.Button();
+            this.saveNewRuleButton = new System.Windows.Forms.Button();
+            this.saveEditRuleButton = new System.Windows.Forms.Button();
             this.ruleTextBox = new System.Windows.Forms.TextBox();
             this.addUniqueRuleButton = new System.Windows.Forms.Button();
             this.editRuleButton = new System.Windows.Forms.Button();
@@ -88,8 +91,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.charNameBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.saveEditRuleButton = new System.Windows.Forms.Button();
-            this.saveNewRuleButton = new System.Windows.Forms.Button();
             this.statPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.specRuleAmountBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ducatsBox)).BeginInit();
@@ -162,6 +163,7 @@
             // statPanel
             // 
             this.statPanel.BackColor = System.Drawing.Color.Cornsilk;
+            this.statPanel.Controls.Add(this.saveCharButton);
             this.statPanel.Controls.Add(this.saveNewRuleButton);
             this.statPanel.Controls.Add(this.saveEditRuleButton);
             this.statPanel.Controls.Add(this.ruleTextBox);
@@ -221,6 +223,36 @@
             this.statPanel.Name = "statPanel";
             this.statPanel.Size = new System.Drawing.Size(964, 740);
             this.statPanel.TabIndex = 6;
+            // 
+            // saveCharButton
+            // 
+            this.saveCharButton.Location = new System.Drawing.Point(198, 75);
+            this.saveCharButton.Name = "saveCharButton";
+            this.saveCharButton.Size = new System.Drawing.Size(75, 139);
+            this.saveCharButton.TabIndex = 54;
+            this.saveCharButton.Text = "Save Character Stats";
+            this.saveCharButton.UseVisualStyleBackColor = true;
+            this.saveCharButton.Click += new System.EventHandler(this.saveCharButton_Click);
+            // 
+            // saveNewRuleButton
+            // 
+            this.saveNewRuleButton.Location = new System.Drawing.Point(538, 467);
+            this.saveNewRuleButton.Name = "saveNewRuleButton";
+            this.saveNewRuleButton.Size = new System.Drawing.Size(75, 23);
+            this.saveNewRuleButton.TabIndex = 53;
+            this.saveNewRuleButton.Text = "Save Rule";
+            this.saveNewRuleButton.UseVisualStyleBackColor = true;
+            this.saveNewRuleButton.Click += new System.EventHandler(this.saveNewRuleButton_Click);
+            // 
+            // saveEditRuleButton
+            // 
+            this.saveEditRuleButton.Location = new System.Drawing.Point(429, 467);
+            this.saveEditRuleButton.Name = "saveEditRuleButton";
+            this.saveEditRuleButton.Size = new System.Drawing.Size(75, 23);
+            this.saveEditRuleButton.TabIndex = 52;
+            this.saveEditRuleButton.Text = "Save Rule";
+            this.saveEditRuleButton.UseVisualStyleBackColor = true;
+            this.saveEditRuleButton.Click += new System.EventHandler(this.saveEditRuleButton_Click);
             // 
             // ruleTextBox
             // 
@@ -415,10 +447,10 @@
             // 
             // imgTestBrowser
             // 
-            this.imgTestBrowser.Location = new System.Drawing.Point(3, 510);
+            this.imgTestBrowser.Location = new System.Drawing.Point(353, 496);
             this.imgTestBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.imgTestBrowser.Name = "imgTestBrowser";
-            this.imgTestBrowser.Size = new System.Drawing.Size(229, 202);
+            this.imgTestBrowser.Size = new System.Drawing.Size(420, 241);
             this.imgTestBrowser.TabIndex = 32;
             // 
             // imageBox
@@ -706,26 +738,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Character Name:";
             // 
-            // saveEditRuleButton
-            // 
-            this.saveEditRuleButton.Location = new System.Drawing.Point(429, 467);
-            this.saveEditRuleButton.Name = "saveEditRuleButton";
-            this.saveEditRuleButton.Size = new System.Drawing.Size(75, 23);
-            this.saveEditRuleButton.TabIndex = 52;
-            this.saveEditRuleButton.Text = "Save Rule";
-            this.saveEditRuleButton.UseVisualStyleBackColor = true;
-            this.saveEditRuleButton.Click += new System.EventHandler(this.saveEditRuleButton_Click);
-            // 
-            // saveNewRuleButton
-            // 
-            this.saveNewRuleButton.Location = new System.Drawing.Point(538, 467);
-            this.saveNewRuleButton.Name = "saveNewRuleButton";
-            this.saveNewRuleButton.Size = new System.Drawing.Size(75, 23);
-            this.saveNewRuleButton.TabIndex = 53;
-            this.saveNewRuleButton.Text = "Save Rule";
-            this.saveNewRuleButton.UseVisualStyleBackColor = true;
-            this.saveNewRuleButton.Click += new System.EventHandler(this.saveNewRuleButton_Click);
-            // 
             // EditCharacter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -823,5 +835,6 @@
         private System.Windows.Forms.Button editRuleButton;
         private System.Windows.Forms.Button saveEditRuleButton;
         private System.Windows.Forms.Button saveNewRuleButton;
+        private System.Windows.Forms.Button saveCharButton;
     }
 }
