@@ -24,6 +24,9 @@ namespace CarnevaleDatabase.Interface
         KeyWordController keyWordController = new KeyWordController();
         List<SpecialRule> specialRules = new List<SpecialRule>();
         SpecialRulesController specRulesController = new SpecialRulesController();
+        List<Weapon> weaponsList = new List<Weapon>();
+        WeaponController weaponsController = new WeaponController();
+        UniqueRule selectedRule;
 
 
         public EditCharacter()
@@ -58,6 +61,9 @@ namespace CarnevaleDatabase.Interface
         {
             selectedCharacter = (Character)selectCharCombo.SelectedItem;
             statPanel.Visible = true;
+            ruleTextBox.Visible = false;            
+            saveEditRuleButton.Visible = false;
+            saveNewRuleButton.Visible = false;
             charNameBox.Text = selectedCharacter.Name;
             baseSizeBox.Value = selectedCharacter.BaseSize.BaseSize;
             movementBox.Value = selectedCharacter.Movement;
@@ -88,6 +94,15 @@ namespace CarnevaleDatabase.Interface
             specRuleListBox.DataSource = selectedCharacter.SpecialRules;
             specRuleListBox.DisplayMember = "fullString";
 
+            weaponsList = weaponsController.GetWeapons();
+            weaponCombo.DataSource = weaponsList;
+            weaponCombo.DisplayMember = "WeaponName";
+            weaponListBox.DataSource = selectedCharacter.Weapons;
+            weaponListBox.DisplayMember = "WeaponName";
+
+            uniqueRuleBox.DataSource = selectedCharacter.UniqueRules;
+            uniqueRuleBox.DisplayMember = "RuleText";
+
         }
 
         private void testURLButton_Click(object sender, EventArgs e)
@@ -102,10 +117,6 @@ namespace CarnevaleDatabase.Interface
             keyWordsListBox.DataSource = null;
             keyWordsListBox.DataSource = selectedCharacter.KeyWords;
             keyWordsListBox.DisplayMember = "keyWordText";
-
-
-
-
         }
 
         private void addKeyWord_Click(object sender, EventArgs e)
@@ -115,6 +126,110 @@ namespace CarnevaleDatabase.Interface
             keyWordsListBox.DataSource = null;
             keyWordsListBox.DataSource = selectedCharacter.KeyWords;
             keyWordsListBox.DisplayMember = "keyWordText";
+
+        }
+
+        private void removeSpecRuleButton_Click(object sender, EventArgs e)
+        {
+            SpecialRulesInstance ruleToDelete = (SpecialRulesInstance)specRuleListBox.SelectedItem;
+            selectedCharacter.RemoveSpecialRule(ruleToDelete);
+            specRuleListBox.DataSource = null;
+            specRuleListBox.DataSource = selectedCharacter.SpecialRules;
+            specRuleListBox.DisplayMember = "fullString";
+        }
+
+        private void updateSpecRuleNumber_Click(object sender, EventArgs e)
+        {
+            SpecialRulesInstance ruleAmountToEdit = (SpecialRulesInstance)specRuleListBox.SelectedItem;
+            ruleAmountToEdit.Amount = (int)specRuleAmountBox.Value;
+            specRuleListBox.DataSource = null;
+            specRuleListBox.DataSource = selectedCharacter.SpecialRules;
+            specRuleListBox.DisplayMember = "fullString";
+        }
+
+        private void addNewRuleButton_Click(object sender, EventArgs e)
+        {
+            SpecialRulesInstance ruleToAdd = new SpecialRulesInstance();
+            SpecialRule ruleText = (SpecialRule)specRuleCombo.SelectedItem;
+            ruleToAdd.Rule = ruleText.Rule;
+            ruleToAdd.RuleID = ruleText.RuleID;
+            ruleToAdd.Amount = (int)specRuleAmountBox.Value;
+            selectedCharacter.AddSpecialRule(ruleToAdd);
+            specRuleListBox.DataSource = null;
+            specRuleListBox.DataSource = selectedCharacter.SpecialRules;
+            specRuleListBox.DisplayMember = "fullString";
+        }
+
+        private void removeWeapon_Click(object sender, EventArgs e)
+        {
+            Weapon weaponToDelete = (Weapon)weaponListBox.SelectedItem;
+            selectedCharacter.RemoveWeapon(weaponToDelete);
+            weaponListBox.DataSource = null;
+            weaponListBox.DataSource = selectedCharacter.Weapons;
+            weaponListBox.DisplayMember = "WeaponName";
+        }
+
+        private void addWeapon_Click(object sender, EventArgs e)
+        {
+            Weapon weaponToAdd = (Weapon)weaponCombo.SelectedItem;
+            selectedCharacter.AddWeapon(weaponToAdd);
+            weaponListBox.DataSource = null;
+            weaponListBox.DataSource = selectedCharacter.Weapons;
+            weaponListBox.DisplayMember = "WeaponName";
+        }
+
+        private void deleteUniqueRuleButton_Click(object sender, EventArgs e)
+        {
+            UniqueRule ruleToDelete = (UniqueRule)uniqueRuleBox.SelectedItem;
+            selectedCharacter.RemoveUniqueRule(ruleToDelete);
+            charController.RemoveUniqueRule(ruleToDelete);
+            uniqueRuleBox.DataSource = null;
+            uniqueRuleBox.DataSource = selectedCharacter.UniqueRules;
+            uniqueRuleBox.DisplayMember = "RuleText";
+
+        }
+
+        private void editRuleButton_Click(object sender, EventArgs e)
+        {
+            selectedRule = (UniqueRule)uniqueRuleBox.SelectedItem;
+            ruleTextBox.Visible = true;
+            saveEditRuleButton.Visible = true;
+            ruleTextBox.Text = selectedRule.RuleText;
+
+        }
+
+        private void addUniqueRuleButton_Click(object sender, EventArgs e)
+        {
+            ruleTextBox.Visible = true;
+            saveNewRuleButton.Visible = true;
+            ruleTextBox.Clear();
+        }
+
+        private void saveEditRuleButton_Click(object sender, EventArgs e)
+        {
+            selectedRule.RuleText = ruleTextBox.Text;
+            charController.UpdateUniqueRules(selectedRule);
+            uniqueRuleBox.DataSource = null;
+            uniqueRuleBox.DataSource = selectedCharacter.UniqueRules;
+            uniqueRuleBox.DisplayMember = "RuleText";
+            ruleTextBox.Visible = false;
+            saveEditRuleButton.Visible = false;
+
+        }
+
+        private void saveNewRuleButton_Click(object sender, EventArgs e)
+        {
+
+            UniqueRule newRule = new UniqueRule();
+            newRule.RuleText = ruleTextBox.Text;            
+            charController.InsertUniqueRule(newRule, selectedCharacter.CharID);
+            newRule.UniqueRuleID = charController.GetUniqueRuleID(newRule, selectedCharacter.CharID);
+            selectedCharacter.AddUniqueRule(newRule);            
+            uniqueRuleBox.DataSource = null;
+            uniqueRuleBox.DataSource = selectedCharacter.UniqueRules;
+            uniqueRuleBox.DisplayMember = "RuleText";
+            ruleTextBox.Visible = false;
+            saveNewRuleButton.Visible = false;
 
         }
     }

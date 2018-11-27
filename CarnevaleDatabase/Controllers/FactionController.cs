@@ -18,11 +18,11 @@ namespace CarnevaleDatabase.Controllers
         MySqlDataReader dataReader;
         String sql = "";
 
-         public List<Faction> GetFactions()
-        {            
-            connection = dBControl.getConnection();            
-            
-                connection.Open();           
+        public List<Faction> GetFactions()
+        {
+            connection = dBControl.getConnection();
+
+            connection.Open();
 
             sql = "Select * from Factions";
 
@@ -95,6 +95,28 @@ namespace CarnevaleDatabase.Controllers
                 int rows = cmd.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        public int GetFactionID(Faction faction)
+        {
+            int factionID = 0;
+
+            connection = dBControl.getConnection();
+
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT faction_id FROM Factions WHERE faction = @faction", connection))
+
+            {
+                cmd.Parameters.AddWithValue("@faction", faction);
+
+                int rows = cmd.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+            return factionID;
+
         }
     }
 }

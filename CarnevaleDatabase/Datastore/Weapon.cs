@@ -27,6 +27,12 @@ namespace CarnevaleDatabase.Datastore
         public int Evasion { get; set; }
         public int Damage { get; set; }
         public int Penetration { get; set; }
+        public List<WeaponAbility> WeaponAbilities { get; set;}
+
+        public void SetWeaponAbilities(List<WeaponAbility> newWeaponAbilties)
+        {
+            this.WeaponAbilities = newWeaponAbilties;
+        }
 
     }
 }

@@ -88,23 +88,23 @@ namespace CarnevaleDatabase.Controllers
                         break;
 
                     case 50:
-                        Base newBase50 = new Base(1, 50);
+                        Base newBase50 = new Base(3, 50);
                         newCharacter.BaseSize = newBase50;
                         break;
 
                     case 60:
-                        Base newBase60 = new Base(1, 60);
+                        Base newBase60 = new Base(4, 60);
                         newCharacter.BaseSize = newBase60;
                         break;
 
                 }
 
-                 Thread uniqueRulesThread = new Thread(() => newCharacter.SetUniqueRules( GetUniqueRules(newCharacter.CharID)));
+                Thread uniqueRulesThread = new Thread(() => newCharacter.SetUniqueRules( GetUniqueRules(newCharacter.CharID)));
                 uniqueRulesThread.IsBackground = true;
                 uniqueRulesThread.Name = "UnqiueRulesThread";
                 uniqueRulesThread.Start();
 
-                Thread specialRulesThread = new Thread(() => newCharacter.SetSpecialRules(GetSpecialRules(newCharacter.CharID)));
+                Thread specialRulesThread = new Thread(() => newCharacter.SetSpecialRule(GetSpecialRules(newCharacter.CharID)));
                 specialRulesThread.IsBackground = true;
                 specialRulesThread.Name = "SpecialRulesThread";
                 specialRulesThread.Start();
@@ -124,6 +124,63 @@ namespace CarnevaleDatabase.Controllers
             connection.Close();
 
             return charlist;
+        }
+
+        public void UpdateCharacter(Character charToUpdate)
+        {
+
+            int charType = 0;
+            switch (charToUpdate.CharType)
+            {
+                case "Leader":
+                    charType = 1;
+                    break;
+
+                case "Hero":
+                    charType = 2;
+                    break;
+
+                case "Henchman":
+                    charType = 3;
+                    break;
+            }
+
+            FactionController factionController = new FactionController();
+
+            charToUpdate.Faction.FactionID = factionController.GetFactionID(charToUpdate.Faction);
+            
+
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("UPDATE Characters SET name = @name, base_size = @base, movement = @movement, " +
+                "dexterity = @dexterity, attack = @attack, protection = @protection, mind = @mind, actionpoints = @actionpoints, lifepoints = @lifepoints " +
+                "willpoints = @willpoints, commandpoints = @commandPoints, ducats = @ducats, char_type = @charType, is_unique = @isUnique " +
+                "faction = @faction, image_url = @image WHERE char_id = @charID", connection))
+            {
+                cmd.Parameters.AddWithValue("@name", charToUpdate.Name);
+                cmd.Parameters.AddWithValue("@base", charToUpdate.BaseSize.BaseID);
+                cmd.Parameters.AddWithValue("@movement", charToUpdate.Movement);
+                cmd.Parameters.AddWithValue("@dexterity", charToUpdate.Dexterity);
+                cmd.Parameters.AddWithValue("@attack", charToUpdate.Attack);
+                cmd.Parameters.AddWithValue("@protection", charToUpdate.Protection);
+                cmd.Parameters.AddWithValue("@mind", charToUpdate.Mind);
+                cmd.Parameters.AddWithValue("@actionpoints", charToUpdate.Action);
+                cmd.Parameters.AddWithValue("@lifepoints", charToUpdate.Life);
+                cmd.Parameters.AddWithValue("@willpoints", charToUpdate.Will);
+                cmd.Parameters.AddWithValue("@commandPoints", charToUpdate.Command);
+                cmd.Parameters.AddWithValue("@ducats", charToUpdate.Ducats);
+                cmd.Parameters.AddWithValue("@charType", charType);
+                cmd.Parameters.AddWithValue("@isUnique", charToUpdate.IsUnique);
+                cmd.Parameters.AddWithValue("@faction", charToUpdate.Faction.FactionID);
+                cmd.Parameters.AddWithValue("@image", charToUpdate.Image);
+                cmd.Parameters.AddWithValue("@charID", charToUpdate.CharID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            
         }
 
         private List<UniqueRule> GetUniqueRules(int charid)
@@ -154,6 +211,79 @@ namespace CarnevaleDatabase.Controllers
             uniqueRulesConnection.Close();
 
                 return uniqueRules;
+        }        
+
+        public void UpdateUniqueRules (UniqueRule ruleToUpdate)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("UPDATE Unique_Rules SET unique_rule_text = @ruleText WHERE unique_rule_id = @ruleID", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleText", ruleToUpdate.RuleText);
+                cmd.Parameters.AddWithValue("@ruleID", ruleToUpdate.UniqueRuleID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+
+        }
+
+        public void InsertUniqueRule (UniqueRule ruleToInsert, int charID)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO Unique_Rules (unique_rule_text, character_id) VALUES " +
+                "(@ruleText, @charID)", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleText", ruleToInsert.RuleText);
+                cmd.Parameters.AddWithValue("@charID", charID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public int GetUniqueRuleID (UniqueRule ruleToInsert, int charID)
+        {
+            int ruleID = 0;
+
+            connection = dBControl.getConnection();
+            MySqlDataReader dataReader;
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT unique_rule_id FROM Unique_Rules WHERE unique_rule_text = @ruleText AND " +
+                "character_id = @charID", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleText", ruleToInsert.RuleText);
+                cmd.Parameters.AddWithValue("@charID", charID);
+
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    ruleID = dataReader.GetInt16(0);
+                }
+                connection.Close();
+            }
+
+            return ruleID;
+        }
+
+        public void RemoveUniqueRule (UniqueRule ruleToRemove)
+        {
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM Unique_Rules WHERE unique_rule_id = @ruleID", connection))
+            {
+                cmd.Parameters.AddWithValue("@ruleID", ruleToRemove.UniqueRuleID);
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+
         }
 
         private List<SpecialRulesInstance> GetSpecialRules(int charid)
@@ -238,7 +368,7 @@ namespace CarnevaleDatabase.Controllers
                 {
                     Weapon newWeapon = new Weapon();
                     newWeapon.WeaponID = dataReader.GetInt16(3);
-                    newWeapon.WeaponName = dataReader.GetString(2);
+                    newWeapon.WeaponName = dataReader.GetString(4);
                     weapons.Add(newWeapon);
                 }
             }

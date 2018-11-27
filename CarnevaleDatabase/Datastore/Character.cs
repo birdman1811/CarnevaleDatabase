@@ -91,17 +91,17 @@ namespace CarnevaleDatabase.Datastore
             this.KeyWords = keywords;
         }
 
-        public void AddSpecialRules(SpecialRulesInstance specRule)
+        public void AddSpecialRule(SpecialRulesInstance specRule)
         {
             this.SpecialRules.Add(specRule);
         }
 
-        public void RemoveSpecialRules(SpecialRulesInstance specRule)
+        public void RemoveSpecialRule(SpecialRulesInstance specRule)
         {
             this.SpecialRules.Remove(specRule);
         }
 
-        public void SetSpecialRules(List<SpecialRulesInstance> specRules)
+        public void SetSpecialRule(List<SpecialRulesInstance> specRules)
         {
             this.SpecialRules = specRules;
         }

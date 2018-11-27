@@ -17,6 +17,12 @@ namespace CarnevaleDatabase.Datastore
             this.Ability = ability;
         }
 
+        public WeaponAbility(int weaponAbilityID, string ability)
+        {
+            WeaponAbilityID = weaponAbilityID;
+            Ability = ability;
+        }
+
         public int WeaponAbilityID { get; set; }
         public string Ability { get; set; }
     }
