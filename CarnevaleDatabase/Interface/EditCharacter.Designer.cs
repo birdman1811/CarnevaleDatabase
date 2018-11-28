@@ -131,7 +131,7 @@
             this.selectFactionToEditButton.TabIndex = 2;
             this.selectFactionToEditButton.Text = "Select";
             this.selectFactionToEditButton.UseVisualStyleBackColor = true;
-            this.selectFactionToEditButton.Click += new System.EventHandler(this.selectFactionToEditButton_Click);
+            this.selectFactionToEditButton.Click += new System.EventHandler(this.SelectFactionToEditButton_Click);
             // 
             // selectCharLabel
             // 
@@ -158,7 +158,7 @@
             this.selectCharButton.TabIndex = 5;
             this.selectCharButton.Text = "Select Character";
             this.selectCharButton.UseVisualStyleBackColor = true;
-            this.selectCharButton.Click += new System.EventHandler(this.selectCharButton_Click);
+            this.selectCharButton.Click += new System.EventHandler(this.SelectCharButton_Click);
             // 
             // statPanel
             // 
@@ -232,7 +232,7 @@
             this.saveCharButton.TabIndex = 54;
             this.saveCharButton.Text = "Save Character Stats";
             this.saveCharButton.UseVisualStyleBackColor = true;
-            this.saveCharButton.Click += new System.EventHandler(this.saveCharButton_Click);
+            this.saveCharButton.Click += new System.EventHandler(this.SaveCharButton_Click);
             // 
             // saveNewRuleButton
             // 
@@ -242,7 +242,7 @@
             this.saveNewRuleButton.TabIndex = 53;
             this.saveNewRuleButton.Text = "Save Rule";
             this.saveNewRuleButton.UseVisualStyleBackColor = true;
-            this.saveNewRuleButton.Click += new System.EventHandler(this.saveNewRuleButton_Click);
+            this.saveNewRuleButton.Click += new System.EventHandler(this.SaveNewRuleButton_Click);
             // 
             // saveEditRuleButton
             // 
@@ -252,7 +252,7 @@
             this.saveEditRuleButton.TabIndex = 52;
             this.saveEditRuleButton.Text = "Save Rule";
             this.saveEditRuleButton.UseVisualStyleBackColor = true;
-            this.saveEditRuleButton.Click += new System.EventHandler(this.saveEditRuleButton_Click);
+            this.saveEditRuleButton.Click += new System.EventHandler(this.SaveEditRuleButton_Click);
             // 
             // ruleTextBox
             // 
@@ -270,7 +270,7 @@
             this.addUniqueRuleButton.TabIndex = 50;
             this.addUniqueRuleButton.Text = "Add Rule";
             this.addUniqueRuleButton.UseVisualStyleBackColor = true;
-            this.addUniqueRuleButton.Click += new System.EventHandler(this.addUniqueRuleButton_Click);
+            this.addUniqueRuleButton.Click += new System.EventHandler(this.AddUniqueRuleButton_Click);
             // 
             // editRuleButton
             // 
@@ -280,7 +280,7 @@
             this.editRuleButton.TabIndex = 49;
             this.editRuleButton.Text = "Edit Rule";
             this.editRuleButton.UseVisualStyleBackColor = true;
-            this.editRuleButton.Click += new System.EventHandler(this.editRuleButton_Click);
+            this.editRuleButton.Click += new System.EventHandler(this.EditRuleButton_Click);
             // 
             // deleteUniqueRuleButton
             // 
@@ -290,7 +290,7 @@
             this.deleteUniqueRuleButton.TabIndex = 48;
             this.deleteUniqueRuleButton.Text = "Delete Rule";
             this.deleteUniqueRuleButton.UseVisualStyleBackColor = true;
-            this.deleteUniqueRuleButton.Click += new System.EventHandler(this.deleteUniqueRuleButton_Click);
+            this.deleteUniqueRuleButton.Click += new System.EventHandler(this.DeleteUniqueRuleButton_Click);
             // 
             // uniqueRuleBox
             // 
@@ -308,7 +308,7 @@
             this.addWeapon.TabIndex = 46;
             this.addWeapon.Text = "Add Weapon";
             this.addWeapon.UseVisualStyleBackColor = true;
-            this.addWeapon.Click += new System.EventHandler(this.addWeapon_Click);
+            this.addWeapon.Click += new System.EventHandler(this.AddWeapon_Click);
             // 
             // weaponCombo
             // 
@@ -326,7 +326,7 @@
             this.removeWeapon.TabIndex = 44;
             this.removeWeapon.Text = "Remove Weapon";
             this.removeWeapon.UseVisualStyleBackColor = true;
-            this.removeWeapon.Click += new System.EventHandler(this.removeWeapon_Click);
+            this.removeWeapon.Click += new System.EventHandler(this.RemoveWeapon_Click);
             // 
             // weaponListBox
             // 
@@ -344,7 +344,7 @@
             this.addNewRuleButton.TabIndex = 42;
             this.addNewRuleButton.Text = "Add New Rule";
             this.addNewRuleButton.UseVisualStyleBackColor = true;
-            this.addNewRuleButton.Click += new System.EventHandler(this.addNewRuleButton_Click);
+            this.addNewRuleButton.Click += new System.EventHandler(this.AddNewRuleButton_Click);
             // 
             // updateSpecRuleNumber
             // 
@@ -354,7 +354,7 @@
             this.updateSpecRuleNumber.TabIndex = 41;
             this.updateSpecRuleNumber.Text = "Update Rule Amount";
             this.updateSpecRuleNumber.UseVisualStyleBackColor = true;
-            this.updateSpecRuleNumber.Click += new System.EventHandler(this.updateSpecRuleNumber_Click);
+            this.updateSpecRuleNumber.Click += new System.EventHandler(this.UpdateSpecRuleNumber_Click);
             // 
             // specRuleAmountBox
             // 
@@ -389,7 +389,7 @@
             this.removeSpecRuleButton.TabIndex = 38;
             this.removeSpecRuleButton.Text = "Remove Rule";
             this.removeSpecRuleButton.UseVisualStyleBackColor = true;
-            this.removeSpecRuleButton.Click += new System.EventHandler(this.removeSpecRuleButton_Click);
+            this.removeSpecRuleButton.Click += new System.EventHandler(this.RemoveSpecRuleButton_Click);
             // 
             // specRuleListBox
             // 
@@ -415,7 +415,7 @@
             this.deleteKeyWordButton.TabIndex = 35;
             this.deleteKeyWordButton.Text = "Remove Key Word";
             this.deleteKeyWordButton.UseVisualStyleBackColor = true;
-            this.deleteKeyWordButton.Click += new System.EventHandler(this.deleteKeyWordButton_Click);
+            this.deleteKeyWordButton.Click += new System.EventHandler(this.DeleteKeyWordButton_Click);
             // 
             // addKeyWord
             // 
@@ -425,7 +425,7 @@
             this.addKeyWord.TabIndex = 34;
             this.addKeyWord.Text = "Add Key Word";
             this.addKeyWord.UseVisualStyleBackColor = true;
-            this.addKeyWord.Click += new System.EventHandler(this.addKeyWord_Click);
+            this.addKeyWord.Click += new System.EventHandler(this.AddKeyWord_Click);
             // 
             // keyWordsListBox
             // 
@@ -443,7 +443,7 @@
             this.testURLButton.TabIndex = 7;
             this.testURLButton.Text = "Test Image URL";
             this.testURLButton.UseVisualStyleBackColor = true;
-            this.testURLButton.Click += new System.EventHandler(this.testURLButton_Click);
+            this.testURLButton.Click += new System.EventHandler(this.TestURLButton_Click);
             // 
             // imgTestBrowser
             // 

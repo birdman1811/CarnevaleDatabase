@@ -108,7 +108,7 @@ namespace CarnevaleDatabase.Controllers
             using (MySqlCommand cmd = new MySqlCommand("SELECT faction_id FROM Factions WHERE faction = @faction", connection))
 
             {
-                cmd.Parameters.AddWithValue("@faction", faction);
+                cmd.Parameters.AddWithValue("@faction", faction.FactionName);
 
                 int rows = cmd.ExecuteNonQuery();
 

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,8 +22,15 @@ namespace CarnevaleDatabase
 
         private void createCharacter_Click(object sender, EventArgs e)
         {
+            Thread messageThread = new Thread(LoadingMessage);
+            messageThread.Start();
             CreateCharacter creatCharScreen = new CreateCharacter();
             creatCharScreen.Show();            
+        }
+
+        private void LoadingMessage()
+        {
+            MessageBox.Show("Loading, this takes a little while.", "Loading Resource", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void createWeapon_Click(object sender, EventArgs e)

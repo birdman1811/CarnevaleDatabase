@@ -58,23 +58,25 @@ namespace CarnevaleDatabase.Controllers
 
             while (dataReader.Read())
             {
-                Character newCharacter = new Character();
-                newCharacter.CharID = dataReader.GetInt16(0);
-                newCharacter.Name = dataReader.GetString(1);
-                newCharacter.Movement = dataReader.GetInt16(2);
-                newCharacter.Dexterity = dataReader.GetInt16(3);
-                newCharacter.Attack = dataReader.GetInt16(4);
-                newCharacter.Protection = dataReader.GetInt16(5);
-                newCharacter.Mind = dataReader.GetInt16(6);
-                newCharacter.Action = dataReader.GetInt16(7);
-                newCharacter.Life = dataReader.GetInt16(8);
-                newCharacter.Will = dataReader.GetInt16(9);
-                newCharacter.Command = dataReader.GetInt16(10);
-                newCharacter.Ducats = dataReader.GetInt16(11);
-                newCharacter.IsUnique = dataReader.GetBoolean(12);
-                newCharacter.Image = dataReader.GetString(13);
-                newCharacter.CharType = dataReader.GetString(14);
-                newCharacter.Faction = faction;
+                Character newCharacter = new Character
+                {
+                    CharID = dataReader.GetInt16(0),
+                    Name = dataReader.GetString(1),
+                    Movement = dataReader.GetInt16(2),
+                    Dexterity = dataReader.GetInt16(3),
+                    Attack = dataReader.GetInt16(4),
+                    Protection = dataReader.GetInt16(5),
+                    Mind = dataReader.GetInt16(6),
+                    Action = dataReader.GetInt16(7),
+                    Life = dataReader.GetInt16(8),
+                    Will = dataReader.GetInt16(9),
+                    Command = dataReader.GetInt16(10),
+                    Ducats = dataReader.GetInt16(11),
+                    IsUnique = dataReader.GetBoolean(12),
+                    Image = dataReader.GetString(13),
+                    CharType = dataReader.GetString(14),
+                    Faction = faction
+                };
                 switch (dataReader.GetInt16(16))
                 {
                     case 30:
@@ -99,24 +101,32 @@ namespace CarnevaleDatabase.Controllers
 
                 }
 
-                Thread uniqueRulesThread = new Thread(() => newCharacter.SetUniqueRules( GetUniqueRules(newCharacter.CharID)));
-                uniqueRulesThread.IsBackground = true;
-                uniqueRulesThread.Name = "UnqiueRulesThread";
+                Thread uniqueRulesThread = new Thread(() => newCharacter.SetUniqueRules(GetUniqueRules(newCharacter.CharID)))
+                {
+                    IsBackground = true,
+                    Name = "UnqiueRulesThread"
+                };
                 uniqueRulesThread.Start();
 
-                Thread specialRulesThread = new Thread(() => newCharacter.SetSpecialRule(GetSpecialRules(newCharacter.CharID)));
-                specialRulesThread.IsBackground = true;
-                specialRulesThread.Name = "SpecialRulesThread";
+                Thread specialRulesThread = new Thread(() => newCharacter.SetSpecialRule(GetSpecialRules(newCharacter.CharID)))
+                {
+                    IsBackground = true,
+                    Name = "SpecialRulesThread"
+                };
                 specialRulesThread.Start();
 
-                Thread keyWordsThread = new Thread(() => newCharacter.SetKeyWords(GetKeyWords(newCharacter.CharID)));
-                keyWordsThread.IsBackground = true;
-                keyWordsThread.Name = "KeyWordsThread";
+                Thread keyWordsThread = new Thread(() => newCharacter.SetKeyWords(GetKeyWords(newCharacter.CharID)))
+                {
+                    IsBackground = true,
+                    Name = "KeyWordsThread"
+                };
                 keyWordsThread.Start();
 
-                Thread weaponsThread = new Thread(() => newCharacter.SetWeapons(getWeapons(newCharacter.CharID)));
-                weaponsThread.IsBackground = true;
-                weaponsThread.Name = "WeaponsThread";
+                Thread weaponsThread = new Thread(() => newCharacter.SetWeapons(GetWeapons(newCharacter.CharID)))
+                {
+                    IsBackground = true,
+                    Name = "WeaponsThread"
+                };
                 weaponsThread.Start();
 
                 charlist.Add(newCharacter);
@@ -143,12 +153,7 @@ namespace CarnevaleDatabase.Controllers
                 case "Henchman":
                     charType = 3;
                     break;
-            }
-
-            FactionController factionController = new FactionController();
-
-            charToUpdate.Faction.FactionID = factionController.GetFactionID(charToUpdate.Faction);
-            
+            }            
 
             connection = dBControl.getConnection();
             connection.Open();
@@ -183,7 +188,81 @@ namespace CarnevaleDatabase.Controllers
             
         }
 
-        private List<UniqueRule> GetUniqueRules(int charid)
+        public void InsertNewCharacter(Character character)
+        {
+
+            int charType = 0;
+            switch (character.CharType)
+            {
+                case "Leader":
+                    charType = 1;
+                    break;
+
+                case "Hero":
+                    charType = 2;
+                    break;
+
+                case "Henchman":
+                    charType = 3;
+                    break;
+            }
+
+            connection = dBControl.getConnection();
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO Characters (name, base_size, movement, dexterity, attack, " +
+                "protection, mind, actionpoints, lifepoints, willpoints, commandpoints, ducats, char_type, is_unique, faction, " +
+                "image_url) VALUES (@name, @base, @movement, @dexterity, @attack, @protection, @mind, @actionpoints, @lifepoints, " +
+                "@willpoints, @commandPoints, @ducats, @charType, @isUnique, @faction, @image)", connection))
+            {
+                cmd.Parameters.AddWithValue("@name", character.Name);
+                cmd.Parameters.AddWithValue("@base", character.BaseSize.BaseID);
+                cmd.Parameters.AddWithValue("@movement", character.Movement);
+                cmd.Parameters.AddWithValue("@dexterity", character.Dexterity);
+                cmd.Parameters.AddWithValue("@attack", character.Attack);
+                cmd.Parameters.AddWithValue("@protection", character.Protection);
+                cmd.Parameters.AddWithValue("@mind", character.Mind);
+                cmd.Parameters.AddWithValue("@actionpoints", character.Action);
+                cmd.Parameters.AddWithValue("@lifepoints", character.Life);
+                cmd.Parameters.AddWithValue("@willpoints", character.Will);
+                cmd.Parameters.AddWithValue("@commandPoints", character.Command);
+                cmd.Parameters.AddWithValue("@ducats", character.Ducats);
+                cmd.Parameters.AddWithValue("@charType", charType);
+                cmd.Parameters.AddWithValue("@isUnique", character.IsUnique);
+                cmd.Parameters.AddWithValue("@faction", character.Faction.FactionID);
+                cmd.Parameters.AddWithValue("@image", character.Image);
+                
+
+                int rows = cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public int GetCharacterID(Character charWithoutID)
+        {
+            int charID = 0;
+
+            connection = dBControl.getConnection();
+            MySqlDataReader dataReader;
+            connection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT char_id FROM Characters WHERE name = @name", connection))
+            {
+                cmd.Parameters.AddWithValue("@name", charWithoutID.Name);                
+
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    charID = dataReader.GetInt16(0);
+                }
+                connection.Close();
+            }
+
+            return charID;
+        }
+
+        public List<UniqueRule> GetUniqueRules(int charid)
         {
             Console.WriteLine("Hello From " + Thread.CurrentThread.Name);
             List<UniqueRule> uniqueRules = new List<UniqueRule>();
@@ -494,7 +573,7 @@ namespace CarnevaleDatabase.Controllers
             }
         }
 
-        public List<Weapon> getWeapons(int charid)
+        public List<Weapon> GetWeapons(int charid)
         {
 
             Console.WriteLine("Hello From " + Thread.CurrentThread.Name);
@@ -515,9 +594,11 @@ namespace CarnevaleDatabase.Controllers
 
                 while (dataReader.Read())
                 {
-                    Weapon newWeapon = new Weapon();
-                    newWeapon.WeaponID = dataReader.GetInt16(3);
-                    newWeapon.WeaponName = dataReader.GetString(4);
+                    Weapon newWeapon = new Weapon
+                    {
+                        WeaponID = dataReader.GetInt16(3),
+                        WeaponName = dataReader.GetString(4)
+                    };
                     weapons.Add(newWeapon);
                 }
             }

@@ -36,7 +36,7 @@ namespace CarnevaleDatabase.Interface
             statPanel.Visible = false;
         }
 
-        private void selectFactionToEditButton_Click(object sender, EventArgs e)
+        private void SelectFactionToEditButton_Click(object sender, EventArgs e)
         {
             selectedFaction = (Faction)factionToEditCombo.SelectedItem;
             charList = charController.GetCharacters(selectedFaction);
@@ -57,7 +57,7 @@ namespace CarnevaleDatabase.Interface
             selectCharCombo.DisplayMember = "name";
         }
 
-        private void selectCharButton_Click(object sender, EventArgs e)
+        private void SelectCharButton_Click(object sender, EventArgs e)
         {
             selectedCharacter = (Character)selectCharCombo.SelectedItem;
             statPanel.Visible = true;
@@ -105,12 +105,12 @@ namespace CarnevaleDatabase.Interface
 
         }
 
-        private void testURLButton_Click(object sender, EventArgs e)
+        private void TestURLButton_Click(object sender, EventArgs e)
         {
             imgTestBrowser.Navigate(imageBox.Text);
         }
 
-        private void deleteKeyWordButton_Click(object sender, EventArgs e)
+        private void DeleteKeyWordButton_Click(object sender, EventArgs e)
         {
             KeyWord keywordToDelete = (KeyWord)keyWordsListBox.SelectedItem;
             keywordToDelete.KeyWordID = charController.GetKeyWordID(keywordToDelete);
@@ -121,7 +121,7 @@ namespace CarnevaleDatabase.Interface
             keyWordsListBox.DisplayMember = "keyWordText";
         }
 
-        private void addKeyWord_Click(object sender, EventArgs e)
+        private void AddKeyWord_Click(object sender, EventArgs e)
         {
             KeyWord newKeyWord = (KeyWord)keyWordsCombo.SelectedItem;
             newKeyWord.KeyWordID = charController.GetKeyWordID(newKeyWord);
@@ -133,7 +133,7 @@ namespace CarnevaleDatabase.Interface
 
         }
 
-        private void removeSpecRuleButton_Click(object sender, EventArgs e)
+        private void RemoveSpecRuleButton_Click(object sender, EventArgs e)
         {
             SpecialRulesInstance ruleToDelete = (SpecialRulesInstance)specRuleListBox.SelectedItem;
             selectedCharacter.RemoveSpecialRule(ruleToDelete);
@@ -143,7 +143,7 @@ namespace CarnevaleDatabase.Interface
             specRuleListBox.DisplayMember = "fullString";
         }
 
-        private void updateSpecRuleNumber_Click(object sender, EventArgs e)
+        private void UpdateSpecRuleNumber_Click(object sender, EventArgs e)
         {
             SpecialRulesInstance ruleAmountToEdit = (SpecialRulesInstance)specRuleListBox.SelectedItem;
             ruleAmountToEdit.Amount = (int)specRuleAmountBox.Value;
@@ -155,7 +155,7 @@ namespace CarnevaleDatabase.Interface
             specRuleListBox.DisplayMember = "fullString";
         }
 
-        private void addNewRuleButton_Click(object sender, EventArgs e)
+        private void AddNewRuleButton_Click(object sender, EventArgs e)
         {
             SpecialRulesInstance ruleToAdd = new SpecialRulesInstance();
             SpecialRule ruleText = (SpecialRule)specRuleCombo.SelectedItem;
@@ -169,7 +169,7 @@ namespace CarnevaleDatabase.Interface
             specRuleListBox.DisplayMember = "fullString";
         }
 
-        private void removeWeapon_Click(object sender, EventArgs e)
+        private void RemoveWeapon_Click(object sender, EventArgs e)
         {
             Weapon weaponToDelete = (Weapon)weaponListBox.SelectedItem;
             selectedCharacter.RemoveWeapon(weaponToDelete);
@@ -179,7 +179,7 @@ namespace CarnevaleDatabase.Interface
             weaponListBox.DisplayMember = "WeaponName";
         }
 
-        private void addWeapon_Click(object sender, EventArgs e)
+        private void AddWeapon_Click(object sender, EventArgs e)
         {
             Weapon weaponToAdd = (Weapon)weaponCombo.SelectedItem;
             selectedCharacter.AddWeapon(weaponToAdd);
@@ -189,7 +189,7 @@ namespace CarnevaleDatabase.Interface
             weaponListBox.DisplayMember = "WeaponName";
         }
 
-        private void deleteUniqueRuleButton_Click(object sender, EventArgs e)
+        private void DeleteUniqueRuleButton_Click(object sender, EventArgs e)
         {
             UniqueRule ruleToDelete = (UniqueRule)uniqueRuleBox.SelectedItem;
             selectedCharacter.RemoveUniqueRule(ruleToDelete);
@@ -199,7 +199,7 @@ namespace CarnevaleDatabase.Interface
             uniqueRuleBox.DisplayMember = "RuleText";
         }
 
-        private void editRuleButton_Click(object sender, EventArgs e)
+        private void EditRuleButton_Click(object sender, EventArgs e)
         {
             selectedRule = (UniqueRule)uniqueRuleBox.SelectedItem;
             ruleTextBox.Visible = true;
@@ -208,14 +208,14 @@ namespace CarnevaleDatabase.Interface
 
         }
 
-        private void addUniqueRuleButton_Click(object sender, EventArgs e)
+        private void AddUniqueRuleButton_Click(object sender, EventArgs e)
         {
             ruleTextBox.Visible = true;
             saveNewRuleButton.Visible = true;
             ruleTextBox.Clear();
         }
 
-        private void saveEditRuleButton_Click(object sender, EventArgs e)
+        private void SaveEditRuleButton_Click(object sender, EventArgs e)
         {
             selectedRule.RuleText = ruleTextBox.Text;
             charController.UpdateUniqueRules(selectedRule);
@@ -227,11 +227,13 @@ namespace CarnevaleDatabase.Interface
 
         }
 
-        private void saveNewRuleButton_Click(object sender, EventArgs e)
+        private void SaveNewRuleButton_Click(object sender, EventArgs e)
         {
 
-            UniqueRule newRule = new UniqueRule();
-            newRule.RuleText = ruleTextBox.Text;            
+            UniqueRule newRule = new UniqueRule
+            {
+                RuleText = ruleTextBox.Text
+            };
             charController.InsertUniqueRule(newRule, selectedCharacter.CharID);
             newRule.UniqueRuleID = charController.GetUniqueRuleID(newRule, selectedCharacter.CharID);
             selectedCharacter.AddUniqueRule(newRule);            
@@ -243,7 +245,7 @@ namespace CarnevaleDatabase.Interface
 
         }
 
-        private void saveCharButton_Click(object sender, EventArgs e)
+        private void SaveCharButton_Click(object sender, EventArgs e)
         {
             selectedCharacter.Name = charNameBox.Text;
             selectedCharacter.BaseSize.BaseSize = (int)baseSizeBox.Value;
@@ -277,7 +279,7 @@ namespace CarnevaleDatabase.Interface
             selectedCharacter.Ducats = (int)ducatsBox.Value;
             selectedCharacter.CharType = charTypeBox.Text;
             selectedCharacter.IsUnique = isUniqueCheckBox.Checked;
-            selectedCharacter.Faction = (Faction)factionBox.SelectedItem;
+            selectedCharacter.Faction = (Faction)factionBox.SelectedItem;            
             selectedCharacter.Image = imageBox.Text;
 
             charController.UpdateCharacter(selectedCharacter);

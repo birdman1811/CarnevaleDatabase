@@ -10,6 +10,11 @@ namespace CarnevaleDatabase.Datastore
     {
         public Character()
         {
+            KeyWords = new List<KeyWord>();
+            Weapons = new List<Weapon>();
+            SpecialRules = new List<SpecialRulesInstance>();
+            UniqueRules = new List<UniqueRule>();
+            BaseSize = new Base();
         }
 
         public Character( string name, int movement, int dexterity, int attack, int protection, int mind, int action, int life, int will,
