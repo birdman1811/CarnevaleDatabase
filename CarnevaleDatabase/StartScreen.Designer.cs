@@ -77,7 +77,7 @@
             this.createWeapon.Name = "createWeapon";
             this.createWeapon.Size = new System.Drawing.Size(159, 54);
             this.createWeapon.TabIndex = 3;
-            this.createWeapon.Text = "Create Weapon";
+            this.createWeapon.Text = "Create Weapon And Edit Weapon Abilities";
             this.createWeapon.UseVisualStyleBackColor = true;
             this.createWeapon.Click += new System.EventHandler(this.createWeapon_Click);
             // 

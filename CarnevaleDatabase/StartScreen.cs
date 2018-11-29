@@ -18,6 +18,7 @@ namespace CarnevaleDatabase
         public StartScreen()
         {
             InitializeComponent();
+            createFaction.Visible = false;
         }
 
         private void createCharacter_Click(object sender, EventArgs e)
@@ -47,8 +48,11 @@ namespace CarnevaleDatabase
 
         private void editWeapon_Click(object sender, EventArgs e)
         {
+            Thread waitThread = new Thread(LoadingMessage);
+            waitThread.Start();
             EditWeapon editWeaponScreen = new EditWeapon();
             editWeaponScreen.Show();
+            
         }
 
         private void keyWords_Click(object sender, EventArgs e)

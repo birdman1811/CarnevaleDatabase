@@ -220,6 +220,8 @@ namespace CarnevaleDatabase.Interface
 
         private void SaveCharacterButton_Click(object sender, EventArgs e)
         {
+            Thread reloadMessageThread = new Thread(WaitMessage);
+            reloadMessageThread.Start();
             newCharacter.Name = nameText.Text;
             newCharacter.BaseSize.BaseSize = (int)baseSizeCounter.Value;
             switch (baseSizeCounter.Value)
@@ -275,8 +277,8 @@ namespace CarnevaleDatabase.Interface
             }
 
             CreateCharacter newScreen = new CreateCharacter();
-            Thread reloadMessageThread = new Thread(WaitMessage);
-            reloadMessageThread.Start();
+            
+            
             newScreen.Show();
             reloadMessageThread.Abort();
 
@@ -287,7 +289,7 @@ namespace CarnevaleDatabase.Interface
 
         private void WaitMessage()
         {
-            MessageBox.Show("Please Wait while I reload the Screen", "Refreshing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Please Wait while I save the Character and reload the Screen", "Refreshing", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
     }

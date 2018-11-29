@@ -90,7 +90,7 @@ namespace CarnevaleDatabase.Controllers
             return weaponAbilities;
         }
 
-        private int GetWeaponAbilityID(string ability)
+        public int GetWeaponAbilityID(string ability)
         {
             int abilityID = 0;
 
@@ -101,7 +101,7 @@ namespace CarnevaleDatabase.Controllers
 
             weaponAbilityIDConnection.Open();
 
-            using (MySqlCommand cmd = new MySqlCommand("Select * FROM Weapon_Abilities WHERE weapon_ability = @ability", weaponAbilityIDConnection))
+            using (MySqlCommand cmd = new MySqlCommand("SELECT weapon_ability_id FROM Weapon_Abilities WHERE weapon_ability = @ability", weaponAbilityIDConnection))
             {
                 cmd.Parameters.AddWithValue("@ability", ability);
 
@@ -116,6 +116,34 @@ namespace CarnevaleDatabase.Controllers
             weaponAbilityIDConnection.Close();
 
                 return abilityID;
+        }
+
+        public int GetWeaponID(Weapon weapon)
+        {
+            int weaponID = 0;
+
+            MySqlConnection weaponAbilityIDConnection;
+            MySqlDataReader dataReader;
+
+            weaponAbilityIDConnection = dBControl.getConnection();
+
+            weaponAbilityIDConnection.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT weapon_id FROM Weapons WHERE weapon = @weapon", weaponAbilityIDConnection))
+            {
+                cmd.Parameters.AddWithValue("@weapon", weapon.WeaponName);
+
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    weaponID = dataReader.GetInt16(0);
+                }
+            }
+
+            weaponAbilityIDConnection.Close();
+
+            return weaponID;
         }
 
         public List<WeaponAbility> GetAllWeaponAbilities()
@@ -184,7 +212,7 @@ namespace CarnevaleDatabase.Controllers
             using (MySqlCommand cmd = new MySqlCommand("INSERT INTO Weapon_Abilities (weapon_ability) VALUES " +
                 "(@ability)", connection))
             {
-                cmd.Parameters.AddWithValue("@weapon", ability.Ability);
+                cmd.Parameters.AddWithValue("@ability", ability.Ability);
                 
 
                 int rows = cmd.ExecuteNonQuery();

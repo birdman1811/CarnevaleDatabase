@@ -10,6 +10,7 @@ namespace CarnevaleDatabase.Datastore
     {
         public Weapon()
         {
+            WeaponAbilities = new List<WeaponAbility>();
         }
 
         public Weapon(string weaponName, int range, int evasion, int damage, int penetration)
@@ -32,6 +33,16 @@ namespace CarnevaleDatabase.Datastore
         public void SetWeaponAbilities(List<WeaponAbility> newWeaponAbilties)
         {
             this.WeaponAbilities = newWeaponAbilties;
+        }
+
+        public void AddWeaponAbility (WeaponAbility ability)
+        {
+            WeaponAbilities.Add(ability);
+        }
+
+        public void RemoveWeaponAbility(WeaponAbility ability)
+        {
+            WeaponAbilities.Remove(ability);
         }
 
     }
