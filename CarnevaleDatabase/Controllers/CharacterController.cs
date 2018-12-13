@@ -133,6 +133,7 @@ namespace CarnevaleDatabase.Controllers
             }
             connection.Close();
 
+            
             return charlist;
         }
 
@@ -388,14 +389,14 @@ namespace CarnevaleDatabase.Controllers
 
                 while (dataReader.Read())
                 {
-                    SpecialRulesInstance newRule = new SpecialRulesInstance(dataReader.GetInt16(0), dataReader.GetString(3), dataReader.GetInt16(4));
+                    SpecialRulesInstance newRule = new SpecialRulesInstance(dataReader.GetInt16(1), dataReader.GetString(3), dataReader.GetInt16(4));                    
                     
                     specialRules.Add(newRule);
                 }
 
             }
 
-            specialRulesConnection.Close();
+            specialRulesConnection.Close();           
 
             Console.WriteLine("Goodbye From " + Thread.CurrentThread.Name);
 
@@ -423,17 +424,21 @@ namespace CarnevaleDatabase.Controllers
 
         public void DeleteSpecialRulesInstance(SpecialRulesInstance ruleToDelete, int charID)
         {
+
+            ruleToDelete.RuleID = GetSpecialRuleID(ruleToDelete);
             connection = dBControl.getConnection();
             connection.Open();
 
             using (MySqlCommand cmd = new MySqlCommand("DELETE FROM Special_Rule_Instances WHERE rule_id = @ruleID AND character_id = @charID " +
                 "AND amount = @amount", connection))
             {
+                Console.WriteLine("Deleting " + ruleToDelete.RuleID + " (" + ruleToDelete.Amount + ")" + " From " + charID);
                 cmd.Parameters.AddWithValue("@ruleId", ruleToDelete.RuleID);
                 cmd.Parameters.AddWithValue("@charID", charID);
                 cmd.Parameters.AddWithValue("@amount", ruleToDelete.Amount);
 
-                int rows = cmd.ExecuteNonQuery();                
+                int rows = cmd.ExecuteNonQuery();
+                Console.WriteLine("Deleted " + rows + " Lines");
                 connection.Close();
             }
         }

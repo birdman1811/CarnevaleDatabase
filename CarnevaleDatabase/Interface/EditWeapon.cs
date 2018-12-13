@@ -87,6 +87,7 @@ namespace CarnevaleDatabase.Interface
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            editWeapon.WeaponName = nameText.Text;
             weaponController.UpdateWeapon(editWeapon);
             editWeaponPanel.Visible = false;
         }
